@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ecommerce-analysis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接信息从环境变量读取，避免把本机账号密码提交到 GitHub。
+    # DB_URL 可不设置，默认连接本机 ecommerce_analysis 数据库。
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ecommerce_analysis?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}
+    # 启动后端前必须设置 DB_USERNAME 和 DB_PASSWORD。
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.ecommerce.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# JWT 配置
+jwt:
+  # JWT_SECRET 必须通过环境变量提供，建议使用足够长的随机字符串。
+  secret: ${JWT_SECRET}
+  # JWT_EXPIRATION 可选，默认 24 小时，单位毫秒。
+  expiration: ${JWT_EXPIRATION:86400000}
+
+# Knife4j
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+# Python 爬虫路径
+crawler:
+  # CRAWLER_PATH 可选，默认指向项目内的 crawler 目录。
+  path: ${CRAWLER_PATH:../crawler}
+
+# DeepSeek AI 配置
+deepseek:
+  # DEEPSEEK_API_KEY 可选；未配置时 AI 选品分析接口会无法调用外部模型。
+  api-key: ${DEEPSEEK_API_KEY:}
+  base-url: https://api.deepseek.com/v1
+  model: deepseek-v4-flash

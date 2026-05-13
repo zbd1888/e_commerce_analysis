@@ -1,0 +1,39 @@
+# IDE and editor files
+.agents/
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Java / Maven build output
+ecommerce-analysis/target/
+
+# Frontend dependencies and build output
+ecommerce-web/node_modules/
+ecommerce-web/dist/
+ecommerce-web/.vite/
+
+# Python cache and virtual environments
+crawler/__pycache__/
+crawler/*.py[cod]
+crawler/.venv/
+crawler/venv/
+
+# Crawler runtime and browser profile state
+crawler/edge_crawler_profile/
+crawler/account_pool.json
+
+# Environment files
+.env
+.env.*
+!.env.example
+ecommerce-web/.env
+ecommerce-web/.env.*
+!ecommerce-web/.env.example
